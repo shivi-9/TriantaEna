@@ -6,12 +6,15 @@ public class Player {
     private int playerScore; // current amount that is held by the player
 
     private int numAce;
+
+    private Boolean ace;
     
     public Player(String playerTeam, String playerName, int playerScore) {
         this.playerTeam = playerTeam;
         this.playerName = playerName;
         this.playerScore = playerScore;
         this.numAce = 0;
+        ace = false;
     }
 
     public String get_playerTeam(){
@@ -28,6 +31,19 @@ public class Player {
 
     public int get_playerScore(){
         return playerScore;
+    }
+
+    public void increment_numAce(){
+        numAce ++;
+    }
+    public int getNumAce(){
+        return numAce;
+    }
+    public void setAce(Boolean ace){
+        this.ace = ace;
+    }
+    public Boolean getAce(){
+        return ace;
     }
     
 }

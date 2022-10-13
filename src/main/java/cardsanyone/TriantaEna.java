@@ -108,10 +108,16 @@ public class TriantaEna extends Game {
 
         int card_value;
         int betAmount;
+        int aceChoice;
         Boolean validBetArg;
         Scanner scObj = new Scanner(System.in);
         Boolean gameEnd = false;
         Boolean isPlayerBust;
+        Boolean validAceChoice;
+        String[] cardRank;
+
+        String winners[];
+
 
 
 
@@ -159,7 +165,9 @@ public class TriantaEna extends Game {
                 currentPlayer = playerObjArr[i];
                 if (playerObjArr[i].get_playerTeam().equals(Components.player)) {
                     currentCard = randomCard(deckObjArr);
-                } else {
+                }
+                else
+                {
                     System.out.println("Banker");
                     currentCard = randomCard(deckObjArr);
                     currentCard.setPiecePossibleMove("faceup");
@@ -188,7 +196,7 @@ public class TriantaEna extends Game {
                                     try{
                                         System.out.println("Enter the Bet amount");
                                         betAmount = scObj.nextInt();
-                                        if(betAmount >= 0 && betAmount<playerObjArr[i].get_playerScore()){
+                                        if(betAmount >= 0 && betAmount<=playerObjArr[i].get_playerScore()){
                                             handObjArr[i].setBetMoney(betAmount);
                                             validBetArg = true;
                                         }
@@ -295,18 +303,81 @@ public class TriantaEna extends Game {
                     keepHitting = false;
                     //Check if there is any playing player remaining
                     for (int j = 0; j < playerObjArr.length; j++){
-                        if(handObjArr[i].getStatus().equals(Components.playing)){
-                            keepHitting = true;
+                        if(playerObjArr[i].get_playerTeam().equals(Components.player)){
+                            if(handObjArr[i].getStatus().equals(Components.playing)){
+                                keepHitting = true;
+                            }
                         }
                     }
 
                 }
             }
-            for (int i = 0; i < playerObjArr.length; i++){
-                System.out.println("Player " + i);
-                System.out.println(handObjArr[i].getStatus());
-            }
+
             gameEnd = true;
+
+        }
+        //Draw cards until it exceeds 27(for the banker)
+        for (int i = 0; i < playerObjArr.length; i++){
+            if(playerObjArr[i].get_playerTeam().equals(Components.banker)){
+                card_value = handObjArr[i].get_hand_total_value();
+                do{
+                    currentCard = randomCard(deckObjArr);
+                    handObjArr[i].addCard(currentCard);
+                }while(card_value <=27);
+
+            }
+        }
+       //update_win_status(handObjArr,playerObjArr);
+
+
+    }
+
+    private void update_win_status(Hand[] handObjArr, Player[] playerObjArr) {
+
+        int[] winners = new int[7];
+        int numWin = 0;
+        int bankerValue = 0;
+        for (int i = 0; i < playerObjArr.length; i++){
+            if(playerObjArr[i].get_playerTeam().equals(Components.banker)){
+                bankerValue = handObjArr[i].get_hand_total_value();
+            }
+
+        }
+        int maxValue = bankerValue;
+        for (int i = 0; i < playerObjArr.length; i++){
+            if(playerObjArr[i].get_playerTeam().equals(Components.player)){
+                if(handObjArr[i].get_hand_total_value() > maxValue){
+                    if(handObjArr[i].get_hand_total_value() == maxValue){
+                        System.out.println("Winner "+playerObjArr[i].get_playerName());
+                        winners[numWin] = i;
+                        numWin++;
+                    }
+                    else{
+                        maxValue = handObjArr[i].get_hand_total_value();
+                        System.out.println("Winner "+playerObjArr[i].get_playerName());
+                        winners[numWin] = i;
+                        numWin++;
+                    }
+
+                }
+            }
+
+        }
+        if(maxValue!=bankerValue){
+            System.out.println("Here are the updated player money");
+            for(int j=0;j< winners.length;j++){
+                playerObjArr[winners[j]].set_playerScore(playerObjArr[winners[j]].get_playerScore() + handObjArr[winners[j]].getBetMoney());
+                System.out.println(playerObjArr[winners[j]].get_playerName());
+                System.out.println(playerObjArr[winners[j]].get_playerScore());
+
+        }
+        }else{
+            for (int i = 0; i < playerObjArr.length; i++){
+                if(playerObjArr[i].get_playerTeam().equals(Components.player)){
+                    bankerValue += handObjArr[i].getBetMoney();
+                }
+            }
+
         }
     }
 

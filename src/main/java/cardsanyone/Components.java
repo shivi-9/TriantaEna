@@ -20,6 +20,12 @@ public class Components {
     public static int hitChoice = 1;
     public static int standChoice = 0;
 
+    public static int aceOne = 1;
+
+    public static int aceEleven = 1;
+
+    public static String ace = "A";
+
 
 
 
