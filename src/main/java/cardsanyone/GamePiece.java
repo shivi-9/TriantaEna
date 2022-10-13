@@ -17,7 +17,7 @@ public class GamePiece {
         this.pieceName = pieceName;
         this.piecePossibleMove = piecePossibleMove;
         this.pieceValue = pieceValue;
-        this.pieceKey = "";
+        this.pieceKey = "0";
     }
 
     public String get_pieceKey(){
