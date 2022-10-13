@@ -17,4 +17,7 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    private void assertTrue(boolean b) {
+    }
 }

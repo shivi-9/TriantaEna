@@ -35,4 +35,9 @@ public class GamePiece {
     public String get_pieceValue(){
         return pieceValue;
     }
+
+    public void setPiecePossibleMove(String pos){
+        this.piecePossibleMove = pos;
+
+    }
 }

@@ -4,11 +4,14 @@ public class Player {
     private String playerName = new String(); // playerName will be the unique player ID
     private String playerTeam = new String(); // playerTeam will be the identifier to distinguish banker from players
     private int playerScore; // current amount that is held by the player
+
+    private int numAce;
     
     public Player(String playerTeam, String playerName, int playerScore) {
         this.playerTeam = playerTeam;
         this.playerName = playerName;
         this.playerScore = playerScore;
+        this.numAce = 0;
     }
 
     public String get_playerTeam(){
