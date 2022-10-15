@@ -1,9 +1,10 @@
 package cardsanyone;
+import java.util.*;
 
 public class BoardCells {
     // This class handles what goes into the boards. In most game, some cells have special powers, 
     // this class handles and stores the power of a particular board cell, but will have an empty
-    // string in the cellPwer attribute for games like Tick-tac-toe, chess and most card games too.
+    // string in the cellPower attribute for games like Tick-tac-toe, chess and most card games too.
     
     private String cellPower = ""; // Power of that cell
     private String cellValue = ""; //Value/Name of that cell

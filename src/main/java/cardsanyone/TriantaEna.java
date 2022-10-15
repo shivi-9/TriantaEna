@@ -1,7 +1,7 @@
 package cardsanyone;
 import java.util.*;
 
-public class TriantaEna extends Game {
+public class TriantaEna implements Game {
     // This class extends the game class and handles everything about the trianta ena game.
 
     private int teamSize;
