@@ -2,58 +2,52 @@ package cardsanyone;
 import java.util.*;
 
 public class Hand {
-    private ArrayList<GamePiece> cards = new ArrayList<GamePiece>();
-    private String status;
-    private int betMoney;
-    private Player player;
+    // This class handles the hand of a particular player. 
 
+    private ArrayList<GamePiece> cards = new ArrayList<GamePiece>(); // cards held by a particular player
+    private String status = ""; // status of the hand/player
+    private int betMoney = 0; 
+    private Player player; // player associated with this hand
+    private int handValue = 0; 
+    private Scanner userInput = new Scanner(System.in);
 
-
-    public static HashMap<String, Integer> rank_map = new HashMap<>();
-
-
-
-    public Hand(String status, Player player){
+    public Hand(String status, int betMoney, Player player){
         this.status = status;
+        this.betMoney = betMoney;
         this.player = player;
-
     }
 
-    static public void init_hashmap() {
-        String rank;
-        Boolean doneFilling = false;
-        int i = 0;
-        while(!doneFilling){
-            if(i==0){
-                rank_map.put("A",11);
-
-            }
-            else if(i==1){
-                rank_map.put("K",10);
-
-            }
-            else if(i>=2 && i<=10){
-                rank_map.put(String.valueOf(i),i);
-
-            }
-            else if(i==11){
-                rank_map.put("Q",10);
-
-            }
-            else if(i==12){
-                rank_map.put("J",10);
-            }
-            i++;
-            if(i>12){
-                doneFilling = true;
-            }
-
-        }
-
-    }
-
+    // add the card to this hand and update the hand value
     public void addCard(GamePiece newCard){
         cards.add(newCard);
+        handValue += Integer.valueOf(newCard.get_pieceValue());
+    }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+
+    // set the bed to zero
+    public void emptyBet(){
+        this.betMoney = 0;
+    }
+    
+    public void setBetMoney(int bm){
+        if(bm > player.get_playerScore()){
+            System.out.println("Sorry, you don't have this much balance\nPLease bet an amount smaller than " + player.get_playerScore());
+            bm = Integer.valueOf(userInput.nextLine());
+            setBetMoney(bm);
+        }
+        else if(bm <= 0){ 
+            System.out.println("Sorry, you can't bet such small amount\nPlease bet an  approporiate amount");
+            bm = Integer.valueOf(userInput.nextLine());
+            setBetMoney(bm);
+        }
+        this.betMoney = bm;
+    }
+
+    public void set_handValue(int hv){
+        this.handValue = hv;
     }
 
     public ArrayList<GamePiece> getcards(){
@@ -64,37 +58,20 @@ public class Hand {
         return status;
     }
 
-    public void setStatus(String status){
-        this.status = status;
-    }
-
     public int getBetMoney(){
         return betMoney;
-    }
-
-    public void setBetMoney(int bm){
-        this.betMoney = bm;
     }
 
     public Player getPlayer(){
         return player;
     }
 
-    public void print_cards_at_hand(){
-        for(int i=0;i<cards.size();i++){
-            System.out.println(cards.get(i).get_pieceName()+" "+cards.get(i).get_piecePossibleMove());
-        }
+    public int get_handValue(){
+        return handValue;
     }
 
-    public int get_hand_total_value(){
-        int sum_value = 0;
-
-        for(int i=0;i<cards.size();i++){
-            String[] rank_split = cards.get(i).get_pieceName().split(" ");
-            sum_value += rank_map.get(rank_split[0]);
-        }
-
-        return sum_value;
+    // empty the cards array list
+    public void emptyCard(){
+        this.cards.clear();
     }
-
 }
