@@ -31,5 +31,7 @@ At the end of each round, the player with the largest total cash amount exceedin
 ## How to compile and run
 1. Navigate to the directory "java" after unzipping the files
 2. Run the following instructions:
+
     javac cardsanyone/GameEngine.java
+    
     java cardsanyone/GameEngine
