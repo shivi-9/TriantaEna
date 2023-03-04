@@ -1,9 +1,14 @@
 package cardsanyone;
+import java.util.*;
 
 public class BoardCells {
-    private String cellPower = new String(); // will not be used for Trianta Ena
-    private String cellValue; // will have associated game pieceName
-    private int[] cellLocation = new int[2]; // i,j position on the board
+    // This class handles what goes into the boards. In most game, some cells have special powers, 
+    // this class handles and stores the power of a particular board cell, but will have an empty
+    // string in the cellPower attribute for games like Tick-tac-toe, chess and most card games too.
+    
+    private String cellPower = ""; // Power of that cell
+    private String cellValue = ""; //Value/Name of that cell
+    private int[] cellLocation = new int[2]; //Location of that cell
 
     public BoardCells(String cellPower, String cellValue, int cellLocation[]){
         this.cellPower = cellPower; 
@@ -25,8 +30,15 @@ public class BoardCells {
         return cellValue;
     }
 
-    // public void set_cellValue(int cellValue){
-    //     this.cellValue = cellValue;
-    // }
-    
+    public void set_cellLocation(int cellLocation[]){
+        this.cellLocation = cellLocation;
+    }
+
+    public void set_cellPower(String cellPower){
+        this.cellPower = cellPower;
+    }
+
+    public void set_cellValue(String cellValue){
+        this.cellValue = cellValue;
+    }
 }

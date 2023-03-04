@@ -1,10 +1,12 @@
 package cardsanyone;
 
 public class Player {
-    private String playerName = new String(); // playerName will be the unique player ID
-    private String playerTeam = new String(); // playerTeam will be the identifier to distinguish banker from players
-    private int playerScore; // current amount that is held by the player
-    
+    // This class has the details about a particular player
+
+    private String playerName = ""; // unique player ID
+    private String playerTeam = ""; 
+    private int playerScore = 0; 
+
     public Player(String playerTeam, String playerName, int playerScore) {
         this.playerTeam = playerTeam;
         this.playerName = playerName;
@@ -19,12 +21,20 @@ public class Player {
         return playerName;
     }
 
-    public void set_playerScore(int playerScore){
-        this.playerScore += playerScore; 
-    }
-
     public int get_playerScore(){
         return playerScore;
     }
-    
+
+    // update the player score
+    public void update_playerScore(int playerScore){
+        this.playerScore += playerScore; 
+    }
+
+    public void set_playerTeam(String playerTeam){
+        this.playerTeam = playerTeam;
+    }
+
+    public void set_playerName(String playerName){
+        this.playerName = playerName; 
+    }
 }

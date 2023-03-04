@@ -1,36 +1,24 @@
 package cardsanyone;
 
 public class Deck {
-    private GamePiece[] cardsInDeck = new GamePiece[52];
+    // This class handles the decks and initialises each card/game piece for that particular deck.
+    private int deckSize; // size of the deck
+    private GamePiece[] cardsInDeck; // array of all the cards in that deck
 
+    // Just to store all the card states in one place
     enum cardState{
         faceUp, faceDown, inActive;
     }
 
-    public void initCards(){
-        String[] suits = {"H", "S", "C", "D"};
-        int k=0;
-        for(int i=0; i<4; i++){
-            for(int j=0; j<13; j++){
-                switch(j){
-                    case 0:
-                    cardsInDeck[k] = new GamePiece("A " + suits[i], cardState.faceDown.toString(), "1");
-                    break;
-                    case 10:
-                    cardsInDeck[k] = new GamePiece("J " + suits[i], cardState.faceDown.toString(), String.valueOf(j+1));
-                    break;
-                    case 11:
-                    cardsInDeck[k] = new GamePiece("Q " + suits[i], cardState.faceDown.toString(), String.valueOf(j+1));
-                    break;
-                    case 12:
-                    cardsInDeck[k] = new GamePiece("K " + suits[i], cardState.faceDown.toString(), String.valueOf(j+1));
-                    break;
-                    default:
-                    cardsInDeck[k] = new GamePiece(String.valueOf(j+1) + " " + suits[i], cardState.faceDown.toString(), String.valueOf(j+1)); 
-                    break;  
-                }
-                k++;
-            }
+    public Deck(int deckSize){
+        this.deckSize = deckSize;
+    }
+
+    // Initialises cards for a particular deck object
+    public void initCards(String[] cardNames, String[] cardValue){
+        cardsInDeck = new GamePiece[deckSize];    
+        for(int i=0; i<deckSize; i++){
+            cardsInDeck[i] = new GamePiece(cardNames[i], String.valueOf(cardState.faceDown), cardValue[i], "0");
         }
     }
 
