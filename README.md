@@ -16,14 +16,20 @@ There can be multiple winners in each round. The winner of a round is any Player
 
 At the end of each round, the player with the largest total cash amount exceeding that of the Banker is given the option to become the Banker. If they choose to accept, the Player becomes the Banker and current Banker becomes a Player. If they decline, the next greatest amount is given the same option, etc.
 
-This Java implementation of Trianta Ena game includes the following functionalities:
+## Description of Classes
+1. Board: Abstract parent class for all the types of boards like a grid board for tick-tac-toe or monopoly and a table type board for card games like BlackJack and Uno.
+2. BoardCells: This class handles what goes into the boards. In most game, some cells have special powers, this class handles and stores the power of a particular board cell, but will have an empty string in the cellPower attribute for games like Tick-tac-toe, chess and most card games too.
+3. CardBoard: This class is the subclass for board class. It handles functions specific to a card game's board.
+4. Deck: This class handles the decks and initialises each card/game piece for that particular deck.
+5. Game: This is the interface for all games. It has declarations for functions which are common to all the games.
+6. GameEngine: This is the main class which calls the class of the game that user wants to play.
+7. GamePiece: This class stores all the pieces required in that game. For example, king in chess, O in tick-tac-toe and cards in a card game. Cards can be of many different types too like cards in UNO are different than used to play Blackjack.
+8. Hand: This class handles the hand of a particular player.
+9. Player: This class has the details about a particular player
+10. TriantaEna: This class extends the game class and handles everything about the Trianta Ena game.
 
-Deal cards to players
-Allow players to place bets
-Calculate the total value of a player's hand
-Determine the winner of each round
-Rotate the Banker at the end of each round
-To run the game, simply run the Main class.
-
-Enjoy playing Trianta Ena!
-
+## How to compile and run
+1. Navigate to the directory "java" after unzipping the files
+2. Run the following instructions:
+    javac cardsanyone/GameEngine.java
+    java cardsanyone/GameEngine
